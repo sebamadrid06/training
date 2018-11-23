@@ -3,6 +3,7 @@ package com.travelocity.Tests;
 import com.travelocity.base.TestBase;
 import com.travelocity.screens.HomeScreen;
 import com.travelocity.screens.ResultsScreen;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomeTests extends TestBase {
@@ -19,6 +20,8 @@ public class HomeTests extends TestBase {
         homeScreen.selectDepartingDate();
         homeScreen.selectReturningDate();
         resultsScreen = homeScreen.clickSearch();
+        resultsScreen.clickSort();
+        Assert.assertTrue(resultsScreen.checkSortingOptions());
         Thread.sleep(4000);
     }
 
