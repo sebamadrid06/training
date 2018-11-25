@@ -33,7 +33,7 @@ public class BaseScreen {
 
     public void type(WebElement element, String string){
         try{
-            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -49,7 +49,16 @@ public class BaseScreen {
         return element.isDisplayed();
     }
 
-    public void waitOn(int millis){
+    public void explicitWait(WebElement element){
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void implicitWait(int millis){
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {

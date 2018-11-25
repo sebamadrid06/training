@@ -50,16 +50,22 @@ public class HomeScreen extends BaseScreen {
         click(btnFlights);
     }
 
+    public void clickOrigin(){
+        click(flightOrigin);
+        implicitWait(2000);
+    }
+
+    public void clickDestination(){
+        click(flightDestination);
+        implicitWait(1000);
+    }
+
     public void sendOrigin(){
-        waitOn(2000);
         type(flightOrigin,"LAS");
-        waitOn(2000);
     }
 
     public void sendDestination(){
-        waitOn(2000);
         type(flightDestination, "LAX");
-        waitOn(2000);
     }
 
     public void selectDepartingDate(){
@@ -68,7 +74,7 @@ public class HomeScreen extends BaseScreen {
     }
 
     public void selectReturningDate(){
-        waitOn(2000);
+        implicitWait(2000);
         click(flightReturningDate);
         click(nextMonth);
         click(nextMonth);
