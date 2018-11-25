@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultsScreen extends BaseScreen {
-    public ResultsScreen(WebDriver driver) {
+public class ResultsFirstScreen extends BaseScreen {
+    public ResultsFirstScreen(WebDriver driver) {
         super(driver);
     }
 
@@ -109,6 +109,13 @@ public class ResultsScreen extends BaseScreen {
 
         return isSorted;
     }
+
+    public ResultsSecondScreen clickSelect(){
+        click(btnSelectlist.get(0));
+
+        return new ResultsSecondScreen(driver);
+    }
+
 }
 
 

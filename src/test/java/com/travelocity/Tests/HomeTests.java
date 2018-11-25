@@ -1,14 +1,16 @@
 package com.travelocity.Tests;
 
 import com.travelocity.base.TestBase;
-import com.travelocity.screens.HomeScreen;
-import com.travelocity.screens.ResultsScreen;
+import com.travelocity.screens.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomeTests extends TestBase {
 
-    ResultsScreen resultsScreen;
+    private ResultsFirstScreen resultsFirstScreen;
+    private ResultsSecondScreen resultsSecondScreen;
+    private ReviewTripScreen reviewTripScreen;
+    private FlightCheckoutScreen flightCheckoutScreen;
 
     @Test
     public void HomeTest() throws InterruptedException {
@@ -21,15 +23,28 @@ public class HomeTests extends TestBase {
         homeScreen.sendDestination();
         homeScreen.selectDepartingDate();
         homeScreen.selectReturningDate();
-        resultsScreen = homeScreen.clickSearch();
-        Assert.assertTrue(resultsScreen.checkSelectButtonsCount());
-        Assert.assertTrue(resultsScreen.checkFlightDurationCount());
-        Assert.assertTrue(resultsScreen.checkFlightDetailsCount());
-        resultsScreen.clickSort();
-        Assert.assertTrue(resultsScreen.checkSortingOptions());
-        resultsScreen.clickShorterDuration();
-        Assert.assertTrue(resultsScreen.checkDurationSort());
-        
+        resultsFirstScreen = homeScreen.clickSearch();
+        Assert.assertTrue(resultsFirstScreen.checkSelectButtonsCount());
+        Assert.assertTrue(resultsFirstScreen.checkFlightDurationCount());
+        Assert.assertTrue(resultsFirstScreen.checkFlightDetailsCount());
+        resultsFirstScreen.clickSort();
+        Assert.assertTrue(resultsFirstScreen.checkSortingOptions());
+        resultsFirstScreen.clickShorterDuration();
+        Assert.assertTrue(resultsFirstScreen.checkDurationSort());
+        resultsSecondScreen = resultsFirstScreen.clickSelect();
+        reviewTripScreen = resultsSecondScreen.clickThirdResult();
+        reviewTripScreen.moveDriver();
+        Assert.assertTrue(reviewTripScreen.checkDepartureInfo());
+        Assert.assertTrue(reviewTripScreen.checkReturningInfo());
+        Assert.assertTrue(reviewTripScreen.checkPriceGuarantee());
+        Assert.assertTrue(reviewTripScreen.checkPriceTotal());
+        flightCheckoutScreen = reviewTripScreen.clickContinueButton();
+        Assert.assertTrue(flightCheckoutScreen.checkDatesSummary());
+        Assert.assertTrue(flightCheckoutScreen.checkPriceSummary());
+        Assert.assertTrue(flightCheckoutScreen.checkPaymentSection());
+        Assert.assertTrue(flightCheckoutScreen.checkTravelerDetails());
+        Assert.assertTrue(flightCheckoutScreen.checkContinueButton());
+
         Thread.sleep(4000);
     }
 

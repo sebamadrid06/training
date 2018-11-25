@@ -81,10 +81,10 @@ public class HomeScreen extends BaseScreen {
         click(calendarDaysList.get(0));
     }
 
-    public ResultsScreen clickSearch(){
+    public ResultsFirstScreen clickSearch(){
         click(btnSearch);
 
-        return new ResultsScreen(driver);
+        return new ResultsFirstScreen(driver);
     }
 
 }

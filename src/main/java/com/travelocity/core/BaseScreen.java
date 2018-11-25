@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseScreen {
 
-    public final int TIMEOUT = 5;
+    public final int TIMEOUT = 10;
     protected WebDriver driver;
     private WebDriverWait wait;
 
@@ -40,21 +40,13 @@ public class BaseScreen {
         element.sendKeys(string);
     }
 
-    public boolean elementIsDisplayed(WebElement element){
-        try{
-            wait.until(ExpectedConditions.visibilityOf(element));
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-        return element.isDisplayed();
-    }
-
-    public void explicitWait(WebElement element){
+    public boolean isElementDisplayed(WebElement element){
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
     }
 
 
