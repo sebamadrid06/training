@@ -22,11 +22,25 @@ public class HomeScreen extends BaseScreen {
     @FindBy(id="flight-destination-hp-flight")
     private WebElement flightDestination;
 
+    @FindBy(id="package-destination-hp-package")
+    private WebElement flightDestinationPackage;
+
+    @FindBy(id="package-origin-hp-package")
+    private WebElement flightOriginPackage;
+
+
     @FindBy(id="flight-departing-hp-flight")
     private WebElement flightDepartingDate;
 
+    @FindBy(id="package-departing-hp-package")
+    private WebElement flightDepartingDatePackage;
+
+
     @FindBy(id="flight-returning-hp-flight")
     private WebElement flightReturningDate;
+
+    @FindBy(id="package-returning-hp-package")
+    private WebElement flightReturningDatePackage;
 
     @FindBy(id="flight-type-roundtrip-label-hp-flight")
     private WebElement btnRoundtrip;
@@ -40,7 +54,39 @@ public class HomeScreen extends BaseScreen {
     @FindBy(xpath="//form[@id='gcw-flights-form-hp-flight']//button[@type='submit']")
     private WebElement btnSearch;
 
+    @FindBy(id="search-button-hp-package")
+    private WebElement btnSearchPackage;
 
+    @FindBy(id="tab-package-tab-hp")
+    private WebElement btnPackage;
+
+    @FindBy(xpath="//*[@for='fh-fh-hp-package']")
+    private WebElement btnFlightHotel;
+
+    @FindBy(xpath="//*[@data-gcw-field-available-for-sub-nav-option='flight-hotel,flight-hotel-car']")
+    private WebElement flightOptions;
+
+    @FindBy(xpath="//*[@id='package-rooms-label-hp-package']")
+    private WebElement txtRooms;
+
+    @FindBy(xpath="//*[@class='datepicker-cal-month']//*[@data-day='1']")
+    private WebElement dayToDepart;
+
+    @FindBy(xpath="//*[@class='datepicker-cal-month']//*[@data-day='14']")
+    private WebElement dayToReturn;
+
+
+    public void clickFlightHotel(){
+        click(btnFlightHotel);
+    }
+
+    public void clickPackage(){
+        click(btnPackage);
+    }
+
+    public boolean checkFlightAndHotel(){
+        return isElementDisplayed(flightOptions) && isElementDisplayed(txtRooms);
+    }
 
     public void clickRoundTrip(){
         click(btnRoundtrip);
@@ -68,23 +114,55 @@ public class HomeScreen extends BaseScreen {
         type(flightDestination, "LAX");
     }
 
+    public void sendOriginPackage(){
+        click(flightOriginPackage);
+        implicitWait(1000);
+        type(flightOriginPackage,"LAS");
+    }
+
+    public void sendDestinationPackage(){
+        click(flightDestinationPackage);
+        implicitWait(1000);
+        type(flightDestinationPackage, "LAX");
+    }
+
+
     public void selectDepartingDate(){
         click(flightDepartingDate);
-        click(calendarDaysList.get(4));
+        click(nextMonth);
+        click(nextMonth);
+        click(dayToDepart);
+    }
+
+    public void selectDepartingDatePackage(){
+        click(flightDepartingDatePackage);
+        click(nextMonth);
+        click(nextMonth);
+        click(dayToDepart);
     }
 
     public void selectReturningDate(){
         implicitWait(2000);
         click(flightReturningDate);
-        click(nextMonth);
-        click(nextMonth);
-        click(calendarDaysList.get(0));
+        click(dayToReturn);
+    }
+
+    public void selectReturningDatePackage(){
+        implicitWait(2000);
+        click(flightReturningDatePackage);
+        click(dayToReturn);
     }
 
     public ResultsFirstScreen clickSearch(){
         click(btnSearch);
 
         return new ResultsFirstScreen(driver);
+    }
+
+    public FlightHotelResultScreen clickSearchPackage(){
+        click(btnSearchPackage);
+
+        return new FlightHotelResultScreen(driver);
     }
 
 }

@@ -5,7 +5,7 @@ import com.travelocity.screens.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HomeTests extends TestBase {
+public class Exercise1 extends TestBase {
 
     private ResultsFirstScreen resultsFirstScreen;
     private ResultsSecondScreen resultsSecondScreen;
@@ -13,7 +13,8 @@ public class HomeTests extends TestBase {
     private FlightCheckoutScreen flightCheckoutScreen;
 
     @Test
-    public void HomeTest() throws InterruptedException {
+    public void exercise1() throws InterruptedException {
+
         HomeScreen homeScreen = new HomeScreen(getDriver());
         homeScreen.clickFlights();
         homeScreen.clickRoundTrip();
