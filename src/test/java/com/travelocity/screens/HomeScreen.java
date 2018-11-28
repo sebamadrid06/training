@@ -1,9 +1,11 @@
 package com.travelocity.screens;
 
 import com.travelocity.core.BaseScreen;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -74,6 +76,10 @@ public class HomeScreen extends BaseScreen {
 
     @FindBy(xpath="//*[@class='datepicker-cal-month']//*[@data-day='14']")
     private WebElement dayToReturn;
+
+    Select adultsCombo = new Select(driver.findElement(By.id("package-1-adults-hp-package")));
+    private List<WebElement> sortOptionsList = adultsCombo.getOptions();
+
 
 
     public void clickFlightHotel(){
@@ -163,6 +169,10 @@ public class HomeScreen extends BaseScreen {
         click(btnSearchPackage);
 
         return new FlightHotelResultScreen(driver);
+    }
+
+    public void select1AdultPackage(){
+        adultsCombo.selectByIndex(0);
     }
 
 }

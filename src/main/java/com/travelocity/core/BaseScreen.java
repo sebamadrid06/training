@@ -4,11 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
 
 public class BaseScreen {
 
@@ -55,6 +58,21 @@ public class BaseScreen {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void clickOnNotClickable(WebElement element){
+        Actions builder = new Actions(driver);
+        builder.moveToElement(element, 0, 0).click().build().perform();
+    }
+
+    public void driverToNewWindow(){
+        ArrayList tabs = new ArrayList(driver.getWindowHandles());
+        if(tabs.size()==2){
+            driver.switchTo().window(tabs.get(1).toString());
+        }
+        if(tabs.size()==3){
+            driver.switchTo().window(tabs.get(2).toString());
         }
     }
 

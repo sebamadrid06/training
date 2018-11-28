@@ -5,6 +5,7 @@ import com.travelocity.core.BaseScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
@@ -42,28 +43,68 @@ public class FlightHotelResultScreen extends BaseScreen {
     private List<WebElement> reviewOverallList;
 
 
+    @FindBy(xpath = "//*[@class='price-col-1']//ul[@class='hotel-ugc']//li[@class='reviewOverall']//ancestor::div[@class='flex-link-wrap']//div[@class='flex-area-primary']//ul[@class='hotel-info']//li[@class='hotelTitle']")
+    private List<WebElement> resultsWithStars;
+
+    @FindBy(xpath = "//*[@class='price-col-1']//ul[@class='hotel-ugc']//li[@class='reviewOverall']//ancestor::div[@class='flex-link-wrap']//div[@class='flex-area-secondary']//ul//li[@class='reviewOverall']//span[@aria-hidden='true']")
+    private List<WebElement> resultsRatingList;
+
+    @FindBy(xpath = "//*[@class='price-col-1']//ul[@class='hotel-ugc']//li[@class='reviewOverall']//ancestor::div[@class='flex-link-wrap']//div[@class='flex-area-secondary']//li[@class='actualPrice price fakeLink ']")
+    private List<WebElement> resultsPricesList;
+
+
+    public static String hotel;
+    public static String hotelPrice;
+    public static String hotelRating;
+
+
+
     public SelectedHotelScreen click3StarsResult(){
-        String[] parts=null;
-        ArrayList<String> list = new ArrayList<String>();
-        ArrayList<String> listChar = new ArrayList<String>();
 
         for(int i = 0; i<reviewOverallList.size();i++){
     String text = reviewOverallList.get(i).getText();
-
-            if(text.contains("/")){
+    if(text.contains("/")){
 
                 if(text.charAt(16)=='3'){
-                    System.out.println("RESULTADO"+reviewOverallList.get(i).getText());
-                    driver.findElement(By.xpath("//*[@class='price-col-1']//ul[@class='hotel-ugc']//li[@class='reviewOverall']//span[@aria-hidden='true']")).click();
+                    implicitWait(1000);
+                    setHotel(resultsWithStars.get(i).getText());
+                    setHotelPrice(resultsPricesList.get(i).getText());
+                    setHotelRating(resultsRatingList.get(i).getText().substring(0,3));
+                    clickOnNotClickable(resultsWithStars.get(i));
                     break;
                 }
-            }
 
+            }
         }
+
 
         return new SelectedHotelScreen(driver);
     }
 
+
+    public static void setHotel(String hotel) {
+        FlightHotelResultScreen.hotel = hotel;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public String getHotelPrice() {
+        return hotelPrice;
+    }
+
+    public static void setHotelPrice(String hotelPrice) {
+        FlightHotelResultScreen.hotelPrice = hotelPrice;
+    }
+
+    public String getHotelRating() {
+        return hotelRating;
+    }
+
+    public static void setHotelRating(String hotelRating) {
+        FlightHotelResultScreen.hotelRating = hotelRating;
+    }
 
     public boolean checkPriceSorting(){
         implicitWait(4000);
@@ -72,7 +113,6 @@ public class FlightHotelResultScreen extends BaseScreen {
         for(int i=0; i<priceContainerList.size();i++){
 
             list.add(priceContainerList.get(i).getText());
-
 
         }
 

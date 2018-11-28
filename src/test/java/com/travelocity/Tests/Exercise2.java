@@ -21,6 +21,7 @@ public class Exercise2 extends TestBase {
         HomeScreen homeScreen = new HomeScreen(getDriver());
         homeScreen.clickPackage();
         homeScreen.clickFlightHotel();
+        homeScreen.select1AdultPackage();
         Assert.assertTrue(homeScreen.checkFlightAndHotel());
         homeScreen.sendOriginPackage();
         homeScreen.sendDestinationPackage();
@@ -35,6 +36,8 @@ public class Exercise2 extends TestBase {
         flightHotelResultScreen.sortByPrice();
         flightHotelResultScreen.checkPriceSorting();
         selectedHotelScreen = flightHotelResultScreen.click3StarsResult();
+        selectedHotelScreen.newTab();
+        Assert.assertTrue(selectedHotelScreen.checkPageElements());
 
 
         Thread.sleep(8000);

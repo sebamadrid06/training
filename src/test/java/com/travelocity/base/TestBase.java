@@ -19,10 +19,10 @@ public class TestBase {
 
     @AfterSuite
     public void afterSuite(){
-        if(driver!=null){
-            driver.close();
-            driver.quit();
-        }
+        //if(driver!=null){
+            //driver.close();
+           // driver.quit();
+        //}
     }
 
     public WebDriver getDriver() {
