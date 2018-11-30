@@ -107,7 +107,7 @@ public class FlightHotelResultScreen extends BaseScreen {
     }
 
     public boolean checkPriceSorting(){
-        implicitWait(4000);
+        implicitWait(8000);
         ArrayList<String> list = new ArrayList<String>();
         boolean isSorted = Ordering.natural().isOrdered(list);
         for(int i=0; i<priceContainerList.size();i++){
@@ -126,7 +126,7 @@ public class FlightHotelResultScreen extends BaseScreen {
 
 
     public boolean checkTopSummary(){
-        implicitWait(6000);
+        implicitWait(8000);
         return isElementDisplayed(tripSummary);
     }
 

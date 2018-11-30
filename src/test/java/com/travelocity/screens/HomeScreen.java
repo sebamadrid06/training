@@ -77,8 +77,8 @@ public class HomeScreen extends BaseScreen {
     @FindBy(xpath="//*[@class='datepicker-cal-month']//*[@data-day='14']")
     private WebElement dayToReturn;
 
-    Select adultsCombo = new Select(driver.findElement(By.id("package-1-adults-hp-package")));
-    private List<WebElement> sortOptionsList = adultsCombo.getOptions();
+    @FindBy(id = "package-1-adults-hp-package")
+    private WebElement adultsSelection;
 
 
 
@@ -102,6 +102,11 @@ public class HomeScreen extends BaseScreen {
         click(btnFlights);
     }
 
+    public static String flyingFrom;
+    public static String flyingTo;
+    public static String adults;
+
+
     public void clickOrigin(){
         click(flightOrigin);
         implicitWait(2000);
@@ -124,12 +129,14 @@ public class HomeScreen extends BaseScreen {
         click(flightOriginPackage);
         implicitWait(1000);
         type(flightOriginPackage,"LAS");
+        setFlyingFrom("LAS");
     }
 
     public void sendDestinationPackage(){
         click(flightDestinationPackage);
         implicitWait(1000);
         type(flightDestinationPackage, "LAX");
+        setFlyingTo("LAX");
     }
 
 
@@ -172,7 +179,45 @@ public class HomeScreen extends BaseScreen {
     }
 
     public void select1AdultPackage(){
+        Select adultsCombo = new Select(driver.findElement(By.id("package-1-adults-hp-package")));
         adultsCombo.selectByIndex(0);
+        setAdults("1");
     }
 
+    public void selectPackageCombo(){
+        Select packageCombo = new Select(driver.findElement(By.xpath("//*[@id='gcw-packages-form-hp-package']/fieldset/div[1]/ul/li[1]/label")));
+        packageCombo.selectByIndex(0);
+    }
+
+    public WebElement getBtnFlights() {
+        return btnFlights;
+    }
+
+    public void setBtnFlights(WebElement btnFlights) {
+        this.btnFlights = btnFlights;
+    }
+
+    public String getFlyingFrom() {
+        return flyingFrom;
+    }
+
+    public static void setFlyingFrom(String flyingFrom) {
+        HomeScreen.flyingFrom = flyingFrom;
+    }
+
+    public String getFlyingTo() {
+        return flyingTo;
+    }
+
+    public static void setFlyingTo(String flyingTo) {
+        HomeScreen.flyingTo = flyingTo;
+    }
+
+    public String getAdults() {
+        return adults;
+    }
+
+    public void setAdults(String adults) {
+        HomeScreen.adults = adults;
+    }
 }

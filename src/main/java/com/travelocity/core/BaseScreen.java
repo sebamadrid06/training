@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class BaseScreen {
 
-    public final int TIMEOUT = 10;
+    public final int TIMEOUT = 20;
     protected WebDriver driver;
     private WebDriverWait wait;
 

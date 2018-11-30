@@ -14,6 +14,7 @@ public class TestBase {
         System.setProperty("webdriver.chrome.driver","C:\\Users\\sebam\\Desktop\\Tools\\chromedriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
         driver.get("http://travelocity.com");
     }
 
